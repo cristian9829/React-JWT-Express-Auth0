@@ -4,7 +4,7 @@
   "description": "Servidor de Express con JWT",
   "main": "index.js",
   "scripts": {
-    "servidor" : "nodemon ./index.js --exec babel-node -e js"
+    "servidor": "nodemon ./index.js --exec babel-node -e js"
   },
   "author": "Cristian Clavijo",
   "license": "ISC",

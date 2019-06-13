@@ -32,8 +32,6 @@ export const makeMainRoutes = () => {
           <Route exact path="/" render={(props) => (
             <Productos
               auth={auth} {...props}
-              //productos={resultado}
-              busquedaProducto={this.busquedaProducto}
             />
           ) } />
           
@@ -43,8 +41,6 @@ export const makeMainRoutes = () => {
 
           <Route exact path="/productos" render={ (props) => (
             <Productos
-              //productos={resultado}
-              busquedaProducto={this.busquedaProducto}
               auth={auth} {...props}
             />
           ) } /> 
