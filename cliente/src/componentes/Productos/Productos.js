@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Producto from '../Producto/Producto';
 import Buscador from '../Buscador/Buscador';
 import './Productos.css';
+import axios from 'axios';
 
 class Productos extends Component {
   state = {
@@ -14,7 +15,14 @@ class Productos extends Component {
   }
 
   queryAPI = () =>{
-    console.log(this.props.auth.getAccessToken())
+    //console.log(this.props.auth.getAccessToken())
+    const { getAccessToken} = this.props.auth;
+
+    const headers = {"Authorization": `Bearer ${getAccessToken() }`}
+    const url = 'http://localhost:5000/productos';
+
+    return axios.get(url, {headers})
+            .then(respuesta => this.setState({productos: respuesta.data  }));
   }
 
   login = () =>{
@@ -25,16 +33,22 @@ class Productos extends Component {
     const {isAuthenticated} = this.props.auth;
     return ( 
       <div className="productos">
-        <h2>Nuestros Productos</h2>
-        <Buscador
-          busqueda={this.props.busquedaProducto}
-        />
         { isAuthenticated() && (
-          <p>Estas Logueado</p>
+          <React.Fragment>
+            <h2>Nuestros Productos</h2>
+            <Buscador
+              busqueda={this.props.busquedaProducto}
+            />
+            <ul className="lista-productos">
+              {Object.keys(this.state.productos).map(producto =>(
+                <Producto
+                  informacion = {this.state.productos[producto]}
+                  key = {producto}
+                />
+              ))}
+            </ul>
+          </React.Fragment>
         )}
-        <ul className="lista-productos">
-          
-        </ul>
         { !isAuthenticated() && (
           <div className="contenedor-boton">
             <p>Para ver contenido debes estar logueado</p>
