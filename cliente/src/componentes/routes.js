@@ -11,7 +11,6 @@ import Header from './Header/Header';
 import Navegacion from './Navegacion/Navegacion';
 import Productos from './Productos/Productos';
 import Nosotros from './Nosotros/Nosotros';
-import Error from './Error/Error';
 import SingleProducto from './SingleProducto/SingleProducto';
 import Contacto from './Contacto/Contacto';
 

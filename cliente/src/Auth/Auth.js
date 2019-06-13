@@ -23,6 +23,7 @@ export default class Auth {
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getIdToken = this.getIdToken.bind(this);
     this.renewSession = this.renewSession.bind(this);
+    this.getAccessTokens = this.getAccessTokens.bind(this);
   }
 
   login() {
@@ -34,7 +35,7 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
       } else if (err) {
-        history.replace('/home');
+        history.replace('/productos');
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -60,7 +61,7 @@ export default class Auth {
     this.expiresAt = expiresAt;
 
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/productos');
   }
 
   renewSession() {
@@ -89,7 +90,7 @@ export default class Auth {
     });
 
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/productos');
   }
 
   isAuthenticated() {
@@ -97,5 +98,13 @@ export default class Auth {
     // access token's expiry time
     let expiresAt = this.expiresAt;
     return new Date().getTime() < expiresAt;
+  }
+
+  getAccessTokens(){
+    const accessToken = localStorage.getItem('access_token');
+    if(!accessToken){
+      return new Error("Hubo un error al generar el token");
+    }
+    return accessToken;
   }
 }
